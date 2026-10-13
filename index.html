@@ -5,6 +5,18 @@
 
 <meta charset="UTF-8">
 
+<script id="xb-start-at-top">
+/* Always open the event page at the beginning, including browser back/forward restores. */
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  function startAtTop() { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
+  startAtTop();
+  window.addEventListener('pageshow', startAtTop, { passive: true });
+  document.addEventListener('DOMContentLoaded', startAtTop, { once: true });
+  window.addEventListener('load', function () { requestAnimationFrame(startAtTop); }, { once: true });
+})();
+</script>
+
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0, viewport-fit=cover"
