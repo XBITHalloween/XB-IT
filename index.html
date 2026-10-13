@@ -3954,10 +3954,105 @@ html{scroll-behavior:smooth;}
 @media(max-width:700px){.footer-eco-overlay{padding:12px !important}.footer-eco-overlay p{width:94% !important;padding:11px 13px !important;font-size:12px !important;}}
 </style>
 
+
+<style id="dhl-haunted-float-layer">
+/* High-impact haunted logistics layer: cyberpunk DHL cargo, spectral flight paths, and controlled glitch lighting. */
+.dhl-haunt-layer{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;contain:layout paint;isolation:isolate}
+.dhl-haunt-layer:before{content:"";position:absolute;inset:-20%;background:radial-gradient(ellipse at 8% 30%,rgba(255,174,0,.10),transparent 25%),radial-gradient(ellipse at 94% 65%,rgba(212,5,17,.10),transparent 27%);animation:haunt-atmosphere 9s ease-in-out infinite alternate;}
+.dhl-haunt-layer:after{content:"";position:absolute;left:-20vw;top:0;width:30vw;height:100%;opacity:0;background:linear-gradient(90deg,transparent,rgba(255,174,0,.10),rgba(255,255,255,.06),transparent);transform:skewX(-18deg);animation:haunt-scan 13s linear infinite;}
+
+
+
+
+
+
+
+
+
+.dhl-haunt-bat{position:absolute;width:68px;height:35px;fill:#050507;stroke:rgba(255,157,61,.96);stroke-width:1.1;filter:drop-shadow(0 0 8px rgba(255,90,20,1)) drop-shadow(0 0 22px rgba(255,90,20,.65));will-change:transform}
+.dhl-haunt-bat.b1{top:19%;right:12%;animation:dhl-bat-a 8s ease-in-out infinite,dhl-wing-pulse 1.2s ease-in-out infinite alternate}
+.dhl-haunt-bat.b2{bottom:23%;right:23%;width:36px;opacity:.8;animation:dhl-bat-b 11s ease-in-out infinite,dhl-wing-pulse .9s ease-in-out infinite alternate}
+.dhl-haunt-bat.b3{top:43%;left:23%;width:27px;opacity:.55;animation:dhl-bat-c 14s ease-in-out infinite}
+.dhl-haunt-streak{position:absolute;height:1px;width:190px;background:linear-gradient(90deg,transparent,rgba(255,174,0,.95),rgba(212,5,17,.9),transparent);filter:drop-shadow(0 0 5px rgba(255,174,0,.8));opacity:0;transform:rotate(-18deg);animation:haunt-streak 7s linear infinite}
+.dhl-haunt-streak.s1{top:26%;left:-220px}.dhl-haunt-streak.s2{top:68%;left:-220px;animation-delay:3.8s;scale:.7}
+@keyframes haunt-atmosphere{0%{opacity:.45;transform:scale(.96) rotate(-2deg)}100%{opacity:1;transform:scale(1.08) rotate(2deg)}}
+@keyframes haunt-scan{0%{left:-40vw;opacity:0}8%{opacity:1}22%{left:120vw;opacity:0}100%{left:120vw;opacity:0}}
+30%{translate:20px -35px;rotate:3deg;transform:perspective(500px) rotateY(18deg)}65%{translate:-8px 15px;rotate:12deg;transform:perspective(500px) rotateY(-8deg)}}
+40%{translate:-42px 24px;rotate:-14deg}72%{translate:12px -20px;rotate:5deg}}
+50%{translate:34px -28px;rotate:16deg}}
+50%{translate:-28px 42px;rotate:-18deg}}
+@keyframes dhl-bat-a{0%,100%{translate:0 0;rotate:8deg}25%{translate:-48px 25px;rotate:-13deg}60%{translate:-12px 70px;rotate:12deg}}
+@keyframes dhl-bat-b{0%,100%{translate:0 0;rotate:-7deg}50%{translate:42px -30px;rotate:13deg}}
+@keyframes dhl-bat-c{0%,100%{translate:0 0;rotate:0deg}50%{translate:65px -18px;rotate:-17deg}}
+@keyframes dhl-wing-pulse{from{filter:drop-shadow(0 0 3px rgba(255,90,20,.65))}to{filter:drop-shadow(0 0 10px rgba(255,90,20,1)) drop-shadow(0 0 20px rgba(255,90,20,.6))}}
+@keyframes dhl-haunt-flicker{0%,93%,96%,100%{opacity:1}94%{opacity:.45}95%{opacity:.9}}
+@keyframes haunt-streak{0%{translate:0 0;opacity:0}8%{opacity:.85}32%{translate:150vw -35px;opacity:0}100%{translate:150vw -35px;opacity:0}}
+@media(max-width:700px){.dhl-haunt-bat.b1{right:2%;top:17%;scale:.72}.dhl-haunt-bat.b2{right:8%;bottom:18%;scale:.65}.dhl-haunt-bat.b3{left:4%;top:45%;scale:.65}.dhl-haunt-streak{width:110px}}
+@media(prefers-reduced-motion:reduce){.dhl-haunt-layer:before,.dhl-haunt-layer:after,.dhl-haunt-bat,.dhl-haunt-streak{animation:none!important}}
+</style>
+
+<style id="haunt-effects-visibility-fix">
+/* Highly visible Halloween motion; no DHL boxes. */
+.dhl-haunt-layer{z-index:0!important;overflow:hidden!important;isolation:isolate!important;pointer-events:none!important}
+.dhl-haunt-layer:before{background:radial-gradient(ellipse at 4% 28%,rgba(255,72,0,.24),transparent 29%),radial-gradient(ellipse at 96% 72%,rgba(210,0,28,.22),transparent 30%)!important;animation:hauntPulseStrong 4s ease-in-out infinite alternate!important}
+.dhl-haunt-layer:after{width:42vw!important;background:linear-gradient(90deg,transparent,rgba(255,95,0,.3),rgba(255,255,255,.14),rgba(212,5,17,.25),transparent)!important;animation:hauntScanStrong 6s linear infinite!important}
+.dhl-haunt-bat,.haunt-bat-extra{fill:#ff4b16!important;stroke:#ffb36b!important;stroke-width:1.6!important;filter:drop-shadow(0 0 7px #ff4b16) drop-shadow(0 0 18px rgba(255,45,0,.95))!important;opacity:1!important}
+.dhl-haunt-bat.b1{width:100px!important;height:54px!important;top:17%!important;right:10%!important;animation:hauntFlyOne 5s ease-in-out infinite!important}
+.dhl-haunt-bat.b2{width:70px!important;height:38px!important;bottom:20%!important;right:18%!important;animation:hauntFlyTwo 7s ease-in-out infinite!important;opacity:.95!important}
+.dhl-haunt-bat.b3{width:54px!important;height:30px!important;top:44%!important;left:8%!important;animation:hauntFlyThree 6s ease-in-out infinite!important;opacity:.95!important}
+.haunt-bat-extra{position:absolute;width:84px;height:44px;z-index:2;will-change:transform}
+.hb1{left:38%;top:13%;animation:hauntFlyOne 8s ease-in-out infinite!important}
+.hb2{right:4%;top:52%;width:62px;height:34px;animation:hauntFlyTwo 9s ease-in-out infinite!important}
+.hb3{left:22%;bottom:12%;width:48px;height:27px;animation:hauntFlyThree 7s ease-in-out infinite!important}
+.haunt-vortex{position:absolute;width:240px;height:240px;border:1px solid rgba(255,83,24,.22);border-radius:50%;box-shadow:0 0 35px rgba(255,45,0,.10),inset 0 0 35px rgba(255,45,0,.08);animation:vortexSpin 16s linear infinite}
+.haunt-vortex:before,.haunt-vortex:after{content:"";position:absolute;inset:18px;border:1px dashed rgba(255,150,65,.28);border-radius:50%}
+.haunt-vortex:after{inset:45px;border-color:rgba(212,5,17,.35)}
+.hv1{left:-190px;top:35%;}.hv2{right:-220px;top:12%;width:310px;height:310px;animation-direction:reverse}
+.haunt-warning{position:absolute;left:50%;top:18px;transform:translateX(-50%);font:800 10px/1.2 Arial,sans-serif;letter-spacing:.32em;color:rgba(255,110,45,.6);text-shadow:0 0 14px rgba(255,50,0,.8);animation:warningGlitch 4s steps(1,end) infinite;white-space:nowrap}
+.haunt-lightning{position:absolute;top:-20%;height:140%;width:2px;opacity:0;background:linear-gradient(transparent,rgba(255,80,20,.8),rgba(255,255,255,.9),rgba(212,5,17,.8),transparent);filter:blur(1px);transform:rotate(17deg);animation:lightningSweep 8s linear infinite}
+.hl1{left:15%;animation-delay:1s}.hl2{right:22%;animation-delay:4.5s}
+@keyframes hauntPulseStrong{from{opacity:.65;transform:scale(.96)}to{opacity:1;transform:scale(1.08)}}
+@keyframes hauntScanStrong{0%{left:-45vw;opacity:0}10%{opacity:1}45%{left:130vw;opacity:0}100%{left:130vw;opacity:0}}
+@keyframes hauntFlyOne{0%,100%{transform:translate(0,0) rotate(5deg) scale(1)}35%{transform:translate(-70px,45px) rotate(-16deg) scale(1.12)}70%{transform:translate(24px,90px) rotate(13deg) scale(.94)}}
+@keyframes hauntFlyTwo{0%,100%{transform:translate(0,0) rotate(-8deg)}50%{transform:translate(-100px,-55px) rotate(18deg)}}
+@keyframes hauntFlyThree{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(90px,-32px) rotate(-20deg)}}
+@keyframes vortexSpin{to{transform:rotate(360deg)}}
+@keyframes warningGlitch{0%,91%,94%,100%{opacity:.7;filter:none}92%{opacity:1;filter:blur(.5px);transform:translateX(calc(-50% + 3px))}93%{opacity:.2;transform:translateX(calc(-50% - 2px))}}
+@keyframes lightningSweep{0%,8%,100%{opacity:0;left:10%}10%{opacity:.8}14%{opacity:0;left:80%}50%{opacity:0}}
+@media(max-width:700px){.dhl-haunt-bat.b1{width:72px!important;right:2%!important}.haunt-bat-extra{width:54px;height:30px}.haunt-warning{font-size:8px;letter-spacing:.2em}.haunt-vortex{width:160px;height:160px}}
+@media(prefers-reduced-motion:reduce){.dhl-haunt-layer:before,.dhl-haunt-layer:after,.dhl-haunt-bat,.haunt-bat-extra,.haunt-vortex,.haunt-warning,.haunt-lightning{animation:none!important}}
+</style>
+
+<style id="futuristic-clean-atmosphere">
+/* Futuristic edge-only effects: keep all copy and controls clear. */
+.dhl-haunt-layer{z-index:0!important;pointer-events:none!important}
+.dhl-haunt-layer:before{background:radial-gradient(ellipse at 0% 48%,rgba(255,86,20,.13),transparent 19%),radial-gradient(ellipse at 100% 30%,rgba(212,5,17,.12),transparent 20%),linear-gradient(rgba(255,110,35,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,110,35,.018) 1px,transparent 1px)!important;background-size:auto,auto,42px 42px,42px 42px!important;animation:futureAmbient 9s ease-in-out infinite alternate!important}
+.dhl-haunt-layer:after{width:24vw!important;opacity:0;filter:blur(1px);background:linear-gradient(90deg,transparent,rgba(255,100,30,.13),rgba(255,255,255,.07),transparent)!important;animation:futureScan 9s linear infinite!important}
+.haunt-vortex{width:180px!important;height:180px!important;opacity:.45!important;border-color:rgba(255,105,45,.24)!important;box-shadow:0 0 26px rgba(255,45,0,.08),inset 0 0 25px rgba(255,45,0,.05)!important}
+.hv1{left:-145px!important;top:38%!important}.hv2{right:-175px!important;top:18%!important;width:230px!important;height:230px!important}
+.haunt-lightning{width:1px!important;opacity:0!important;filter:blur(1px)!important}
+.dhl-haunt-bat,.haunt-bat-extra,.haunt-warning{display:none!important}
+@keyframes futureAmbient{from{opacity:.45;transform:scale(1)}to{opacity:.85;transform:scale(1.035)}}
+@keyframes futureScan{0%,8%{left:-30vw;opacity:0}15%{opacity:.8}42%{left:120vw;opacity:0}100%{left:120vw;opacity:0}}
+@media(prefers-reduced-motion:reduce){.dhl-haunt-layer:before,.dhl-haunt-layer:after,.haunt-vortex{animation:none!important}}
+</style>
+
 </head>
 
 
 <body>
+
+<div class="dhl-haunt-layer" aria-hidden="true">
+  
+  
+  
+  
+  <span class="dhl-haunt-streak s1"></span><span class="dhl-haunt-streak s2"></span>
+
+  <div class="haunt-vortex hv1"></div><div class="haunt-vortex hv2"></div>
+  <span class="haunt-lightning hl1"></span><span class="haunt-lightning hl2"></span>
+</div>
+
 <div class="halloween-atmosphere" aria-hidden="true"><span class="halloween-moon"></span><span class="halloween-line one"></span><span class="halloween-line two"></span><span class="halloween-dot one"></span><span class="halloween-dot two"></span><span class="halloween-dot three"></span></div>
 
 <div class="page">
@@ -5163,15 +5258,15 @@ async function checkGameStatus() {
     );
 
 
-    if (data.gameOver === true || data.winner) {
-      const winnerName =
-        typeof data.winner === "string" ? data.winner :
-        (typeof data.name === "string" ? data.name : "The winner");
+    if (
+      data.gameOver
+    ) {
 
       showWinner(
-        winnerName,
-        data.word || WINNING_WORD
+        data.winner,
+        data.word
       );
+
     }
 
   } catch (error) {
@@ -5296,14 +5391,13 @@ form.addEventListener(
          GAME ALREADY OVER
       ----------------------------------------- */
 
-      if (data.gameOver === true) {
-        const winnerName =
-          typeof data.winner === "string" ? data.winner :
-          (typeof data.name === "string" ? data.name : name);
+      if (
+        data.gameOver
+      ) {
 
         showWinner(
-          winnerName,
-          data.word || WINNING_WORD
+          data.winner,
+          data.word
         );
 
         return;
@@ -5314,11 +5408,15 @@ form.addEventListener(
          WINNER
       ----------------------------------------- */
 
-      if (data.winner === true || typeof data.winner === "string") {
+      if (
+        data.winner
+      ) {
+
         showWinner(
-          typeof data.winner === "string" ? data.winner : (data.name || name),
-          data.word || WINNING_WORD
+          data.name,
+          data.word
         );
+
         return;
       }
 
@@ -5374,31 +5472,59 @@ form.addEventListener(
    LOCK ONLY THE SCRABBLE CHALLENGE
 ========================================================= */
 
-function lockChallenge(winner, word) {
-  // Make the lock idempotent and enforce it at both DOM and state level.
-  gameOver = true;
-  challenge.classList.add("challenge-ended");
-  challenge.setAttribute("aria-disabled", "true");
+function lockChallenge(
+  winner,
+  word
+) {
+
+  challenge.classList.add(
+    "challenge-ended"
+  );
+
 
   challengeEndedBanner.innerHTML = `
     <strong>Challenge Ended</strong><br>
-    ${escapeHtml(winner)} won the Halloween Word Challenge with ${escapeHtml(word || WINNING_WORD)}.
+    ${escapeHtml(winner)}
+    won the Halloween Word Challenge
+    with ${escapeHtml(word || WINNING_WORD)}.
   `;
 
-  // Disable every interactive element inside the challenge, including board tiles.
-  challenge.querySelectorAll("button, input, select, textarea").forEach(function(control) {
-    control.disabled = true;
-    control.setAttribute("aria-disabled", "true");
-  });
 
-  // Explicitly clear selection so no tile state remains active.
-  selectedTiles = [];
-  challenge.querySelectorAll(".scrabble-tile.selected").forEach(function(tile) {
-    tile.classList.remove("selected");
-  });
+  document
+    .querySelectorAll(
+      "#challenge input"
+    )
+    .forEach(
+      function(input) {
 
-  submitButton.textContent = "Challenge Ended";
-  setStatus("The challenge has ended.", "success");
+        input.disabled = true;
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      "#challenge button"
+    )
+    .forEach(
+      function(button) {
+
+        button.disabled = true;
+
+      }
+    );
+
+
+  submitButton.textContent =
+    "Challenge Ended";
+
+
+  setStatus(
+    "The challenge has ended.",
+    "success"
+  );
+
 }
 
 
@@ -5426,7 +5552,7 @@ function showWinner(
 
 
   const finalName =
-    (typeof name === "string" && name.trim()) ? name.trim() :
+    name ||
     "The winner";
 
 
