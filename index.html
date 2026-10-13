@@ -5163,15 +5163,15 @@ async function checkGameStatus() {
     );
 
 
-    if (
-      data.gameOver
-    ) {
+    if (data.gameOver === true || data.winner) {
+      const winnerName =
+        typeof data.winner === "string" ? data.winner :
+        (typeof data.name === "string" ? data.name : "The winner");
 
       showWinner(
-        data.winner,
-        data.word
+        winnerName,
+        data.word || WINNING_WORD
       );
-
     }
 
   } catch (error) {
@@ -5296,13 +5296,14 @@ form.addEventListener(
          GAME ALREADY OVER
       ----------------------------------------- */
 
-      if (
-        data.gameOver
-      ) {
+      if (data.gameOver === true) {
+        const winnerName =
+          typeof data.winner === "string" ? data.winner :
+          (typeof data.name === "string" ? data.name : name);
 
         showWinner(
-          data.winner,
-          data.word
+          winnerName,
+          data.word || WINNING_WORD
         );
 
         return;
@@ -5313,15 +5314,11 @@ form.addEventListener(
          WINNER
       ----------------------------------------- */
 
-      if (
-        data.winner
-      ) {
-
+      if (data.winner === true || typeof data.winner === "string") {
         showWinner(
-          data.name,
-          data.word
+          typeof data.winner === "string" ? data.winner : (data.name || name),
+          data.word || WINNING_WORD
         );
-
         return;
       }
 
@@ -5377,59 +5374,31 @@ form.addEventListener(
    LOCK ONLY THE SCRABBLE CHALLENGE
 ========================================================= */
 
-function lockChallenge(
-  winner,
-  word
-) {
-
-  challenge.classList.add(
-    "challenge-ended"
-  );
-
+function lockChallenge(winner, word) {
+  // Make the lock idempotent and enforce it at both DOM and state level.
+  gameOver = true;
+  challenge.classList.add("challenge-ended");
+  challenge.setAttribute("aria-disabled", "true");
 
   challengeEndedBanner.innerHTML = `
     <strong>Challenge Ended</strong><br>
-    ${escapeHtml(winner)}
-    won the Halloween Word Challenge
-    with ${escapeHtml(word || WINNING_WORD)}.
+    ${escapeHtml(winner)} won the Halloween Word Challenge with ${escapeHtml(word || WINNING_WORD)}.
   `;
 
+  // Disable every interactive element inside the challenge, including board tiles.
+  challenge.querySelectorAll("button, input, select, textarea").forEach(function(control) {
+    control.disabled = true;
+    control.setAttribute("aria-disabled", "true");
+  });
 
-  document
-    .querySelectorAll(
-      "#challenge input"
-    )
-    .forEach(
-      function(input) {
+  // Explicitly clear selection so no tile state remains active.
+  selectedTiles = [];
+  challenge.querySelectorAll(".scrabble-tile.selected").forEach(function(tile) {
+    tile.classList.remove("selected");
+  });
 
-        input.disabled = true;
-
-      }
-    );
-
-
-  document
-    .querySelectorAll(
-      "#challenge button"
-    )
-    .forEach(
-      function(button) {
-
-        button.disabled = true;
-
-      }
-    );
-
-
-  submitButton.textContent =
-    "Challenge Ended";
-
-
-  setStatus(
-    "The challenge has ended.",
-    "success"
-  );
-
+  submitButton.textContent = "Challenge Ended";
+  setStatus("The challenge has ended.", "success");
 }
 
 
@@ -5457,7 +5426,7 @@ function showWinner(
 
 
   const finalName =
-    name ||
+    (typeof name === "string" && name.trim()) ? name.trim() :
     "The winner";
 
 
