@@ -4139,6 +4139,89 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
   @media(prefers-reduced-motion:reduce) { .nav-link,.featured-button,.event-visual-card,.featured-button strong span { transition:none !important; } .event-visual-card:hover { transform:none; } }
 </style>
 
+
+<style id="xb-halloween-scrabble-upgrade">
+/* Haunted letter-board treatment — visual-only, preserves existing game logic. */
+#scrabble-challenge .challenge{
+  position:relative;isolation:isolate;overflow:hidden;
+  border:1px solid rgba(255,112,39,.28);
+  background:radial-gradient(ellipse at 50% 0%,rgba(114,28,35,.24),transparent 58%),linear-gradient(145deg,rgba(20,17,24,.97),rgba(5,7,12,.98));
+  box-shadow:0 28px 90px rgba(0,0,0,.5),0 0 45px rgba(180,38,28,.08),inset 0 1px rgba(255,255,255,.05);
+}
+#scrabble-challenge .challenge::before{
+  content:"✦  ☾  ✦";position:absolute;right:20px;top:14px;color:rgba(255,145,77,.3);font-size:19px;letter-spacing:10px;pointer-events:none;
+}
+#scrabble-challenge .challenge::after{
+  content:"THE HAUNTED LETTERS";display:block;position:absolute;left:0;right:0;bottom:9px;text-align:center;
+  color:rgba(255,153,102,.25);font-size:9px;font-weight:800;letter-spacing:.32em;pointer-events:none;
+}
+#scrabble-challenge .section-eyebrow,#scrabble-challenge .answer-label{color:#ff9b62}
+#scrabble-challenge .challenge-title{color:#fff0e4;text-shadow:0 0 22px rgba(255,105,51,.2)}
+#scrabble-challenge .challenge-subtitle{color:#b6a7aa}
+#scrabble-challenge .board-area{position:relative;isolation:isolate;padding:34px 8px 44px}
+#scrabble-challenge .board-area::before{
+  content:"";position:absolute;z-index:-1;inset:12% 4%;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(151,24,32,.18),transparent 68%);filter:blur(12px);pointer-events:none;
+}
+#scrabble-challenge .scrabble-board{
+  border:1px solid rgba(255,126,70,.3);border-radius:18px;gap:8px;padding:14px;
+  background:
+   linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+   linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),
+   radial-gradient(circle at 50% 30%,rgba(121,24,39,.32),transparent 62%),
+   linear-gradient(145deg,#201722,#08090e 72%);
+  background-size:18px 18px,18px 18px,auto,auto;
+  box-shadow:0 24px 55px rgba(0,0,0,.65),0 0 32px rgba(196,42,32,.12),inset 0 0 0 1px rgba(255,255,255,.035),inset 0 0 35px rgba(0,0,0,.6);
+  transform:none;
+}
+#scrabble-challenge .scrabble-board::before{
+  content:"";position:absolute;inset:5px;border:1px solid rgba(255,134,86,.12);border-radius:13px;pointer-events:none;
+}
+#scrabble-challenge .board-square{
+  border-radius:9px;border:1px solid rgba(182,95,94,.2);
+  background:linear-gradient(145deg,rgba(88,47,66,.46),rgba(18,16,25,.92));
+  box-shadow:inset 0 0 14px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.035);
+}
+#scrabble-challenge .scrabble-tile{
+  position:relative;overflow:hidden;border:1px solid rgba(255,220,170,.58);border-radius:9px;
+  color:#24121a;font-weight:900;text-shadow:0 1px rgba(255,255,255,.28);
+  background:radial-gradient(circle at 28% 16%,rgba(255,255,255,.7),transparent 29%),linear-gradient(145deg,#ffe5bd 0%,#d6a36e 52%,#956344 100%);
+  box-shadow:0 7px 0 #58364a,0 10px 18px rgba(0,0,0,.5),inset 0 1px 2px rgba(255,255,255,.7),inset 0 -3px 5px rgba(66,24,30,.24);
+  transition:transform .18s ease,filter .18s ease,box-shadow .18s ease;
+}
+#scrabble-challenge .scrabble-tile::before{
+  content:"";position:absolute;inset:4px;border:1px solid rgba(78,34,42,.19);border-radius:5px;pointer-events:none;
+}
+#scrabble-challenge .scrabble-tile::after{
+  content:"";position:absolute;top:-50%;left:-70%;width:45%;height:200%;transform:rotate(25deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transition:left .45s ease;pointer-events:none;
+}
+#scrabble-challenge .scrabble-tile:hover{transform:translateY(-4px) rotate(-1deg);filter:brightness(1.12) saturate(1.1);box-shadow:0 10px 0 #58364a,0 14px 22px rgba(0,0,0,.55),0 0 18px rgba(255,123,64,.18),inset 0 1px 2px rgba(255,255,255,.7)}
+#scrabble-challenge .scrabble-tile:hover::after{left:130%}
+#scrabble-challenge .scrabble-tile.selected{transform:translateY(-5px) rotate(1deg);border-color:#ffad65;box-shadow:0 0 0 2px rgba(255,139,74,.6),0 8px 0 #6d2c3b,0 0 28px rgba(255,93,55,.42),0 14px 25px rgba(0,0,0,.55),inset 0 1px 2px rgba(255,255,255,.8)}
+#scrabble-challenge .tile-value{color:#5c2d35;font-weight:900}
+#scrabble-challenge .answer-builder{border:1px solid rgba(255,126,70,.16);border-radius:15px;padding:18px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(0,0,0,.18))}
+#scrabble-challenge .answer-display{min-height:60px;border:1px solid rgba(255,132,78,.24);border-radius:12px;letter-spacing:.16em;color:#ffe0bd;background:radial-gradient(ellipse at 50% 0%,rgba(160,36,43,.18),transparent 70%),rgba(0,0,0,.4);box-shadow:inset 0 0 20px rgba(0,0,0,.4),0 0 18px rgba(170,42,34,.05)}
+#scrabble-challenge .answer-placeholder{color:#9f8a91;letter-spacing:normal}
+#scrabble-challenge .small-button,#scrabble-challenge #submitButton{border:1px solid rgba(255,140,77,.35);background:linear-gradient(145deg,#3b202d,#1a111a);color:#ffe7d7;box-shadow:0 5px 16px rgba(0,0,0,.25);transition:transform .18s ease,border-color .18s ease,filter .18s ease}
+#scrabble-challenge .small-button:hover,#scrabble-challenge #submitButton:hover{transform:translateY(-2px);border-color:rgba(255,160,93,.7);filter:brightness(1.15)}
+#scrabble-challenge input{border-color:rgba(255,133,75,.2)}
+@keyframes xbTileHaunt{0%,100%{filter:drop-shadow(0 0 0 rgba(255,80,50,0))}50%{filter:drop-shadow(0 0 4px rgba(255,80,50,.12))}}
+#scrabble-challenge .scrabble-tile{animation:xbTileHaunt 5s ease-in-out infinite}
+#scrabble-challenge .scrabble-tile:nth-child(3n){animation-delay:-1.8s}
+#scrabble-challenge .scrabble-tile:nth-child(4n){animation-delay:-3.1s}
+@media(max-width:520px){#scrabble-challenge .challenge{padding:20px 12px 26px}#scrabble-challenge .scrabble-board{gap:5px;padding:9px;border-radius:13px}#scrabble-challenge .board-area{padding-left:0;padding-right:0}#scrabble-challenge .challenge::before{right:12px;font-size:14px}#scrabble-challenge .challenge::after{font-size:7px;letter-spacing:.2em}}
+@media(prefers-reduced-motion:reduce){#scrabble-challenge .scrabble-tile{animation:none!important;transition:none!important}}
+</style>
+
+
+<style id="subtle-gogreen-topline">
+.gogreen-topline{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 14px;padding:8px 14px;width:fit-content;max-width:100%;border:1px solid rgba(72,153,106,.16);border-radius:999px;background:rgba(35,91,60,.10);color:rgba(224,235,225,.66);font-size:11px;letter-spacing:.035em;line-height:1.35;text-align:center}
+.gogreen-topline strong{font-weight:650;color:rgba(163,205,170,.86)}
+.gogreen-leaf{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:rgba(79,155,103,.14);color:rgba(151,207,162,.85);font-size:12px}
+@media(max-width:520px){.gogreen-topline{font-size:10px;padding:7px 11px;margin-bottom:10px}}
+</style>
+
 </head>
 
 
@@ -4189,6 +4272,11 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
 <!-- =======================================================
      NAV
 ======================================================== -->
+
+<div class="gogreen-topline" role="note" aria-label="DHL GoGreen initiative">
+  <span class="gogreen-leaf" aria-hidden="true">↗</span>
+  <span>Inspired by DHL’s <strong>GoGreen</strong> initiative</span>
+</div>
 
 <div class="nav">
 
