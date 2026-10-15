@@ -4211,7 +4211,10 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
 <style id="moon-caption-cleanup">
   #moonScrollStage .haunt-caption small { display: none !important; }
 </style>
-\n\n<!-- Load visual styles before the first page paint to prevent preview flash -->\n<style id="xb-it-premium-rebuild">
+
+
+<!-- Load visual styles before the first page paint to prevent preview flash -->
+<style id="xb-it-premium-rebuild">
 :root{--xb-amber:#ff9f1c;--xb-hot:#ff6a24;--xb-red:#d40511;--xb-line:rgba(255,255,255,.11);--xb-glass:rgba(255,255,255,.045);--xb-muted:#a7aab4;--xb-ease:cubic-bezier(.2,.8,.2,1)}
 html{scroll-padding-top:26px;scroll-behavior:smooth}
 body{background:#07080b;color:#f6f7fb;overflow-x:hidden}
@@ -4273,7 +4276,8 @@ input:focus,textarea:focus{border-color:rgba(255,159,28,.65)!important;box-shado
 @media(max-width:390px){.nav-link{font-size:10px}.event-eyebrow{font-size:9px;letter-spacing:.1em}.event-title{font-size:46px}.event-description{font-size:15px}}
 @media(hover:none){.xb-cursor-glow{display:none}.event-visual-card:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.event-hero:after{animation:none!important}.event-visual-card,.featured-button,.scrabble-tile,.team-letter-tile{transition:none!important}.xb-cursor-glow{display:none!important}}
-</style>\n<style id="xb-signature-experience">
+</style>
+<style id="xb-signature-experience">
 :root{--xb-orange:#ff812e;--xb-amber:#ffc078;--xb-ease:cubic-bezier(.2,.8,.2,1)}
 html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 .xb-intro{position:fixed;inset:0;z-index:100000;background:#08090c;color:#f7f7f8;display:grid;place-items:center;overflow:hidden;isolation:isolate;transition:opacity .8s var(--xb-ease),visibility .8s;}
@@ -4284,7 +4288,8 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 #scrabbleBoard{max-width:100%;touch-action:manipulation}.scrabble-tile{min-width:0;min-height:48px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .18s var(--xb-ease),box-shadow .18s ease,filter .18s ease}.scrabble-tile:active{transform:translateY(2px) scale(.97)}.scrabble-tile.selected{transform:translateY(-5px);box-shadow:0 8px 0 rgba(0,0,0,.2),0 0 0 2px rgba(255,145,66,.85),0 12px 30px rgba(255,130,46,.18);filter:brightness(1.12)}.scrabble-tile:focus-visible{outline:3px solid #ff9b52;outline-offset:3px}.status{min-height:1.5em}#gameForm input{max-width:100%;min-height:48px}#submitButton,.builder-controls button,.xb-celebration-close{touch-action:manipulation}#challengeEndedBanner{overflow-wrap:anywhere}.xb-network-note{font-size:13px;line-height:1.5;color:#a7a7af;margin-top:8px}body.xb-winner-open{overflow:hidden}
 @media(max-width:640px){.page,.nav,.nav-right,.event-hero,.event-meta,.event-visual-card,.challenge,.board-area,.form-container,.live{min-width:0;max-width:100%}img,video,canvas,iframe{max-width:100%}.event-title,.event-description,.event-visual-card,.challenge *{overflow-wrap:anywhere}.xb-intro-grid{background-size:36px 36px}.xb-intro-center{padding:24px 12px}.xb-intro-rule{margin:20px auto}.xb-intro-center h2{margin-top:20px}.xb-celebration-card{border-radius:22px;padding:30px 20px}.xb-celebration-word{letter-spacing:-.055em}.scrabble-tile{min-height:44px}.xb-skip-intro{font-size:12px}.nav{gap:12px;flex-wrap:wrap}.nav-right{max-width:100%;flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.xb-intro,.xb-intro *,.xb-winner-celebration,.xb-winner-celebration *{animation:none!important;transition:none!important;scroll-behavior:auto!important}.xb-intro-center>*{opacity:1!important;transform:none!important}.xb-intro-grid,.xb-intro-rule{opacity:1!important}.xb-intro-rule span{transform:translateX(0)!important}.xb-particle{display:none!important}.scrabble-tile{transition:none!important}}
-</style>\n<style id="world-class-halloween-moon">
+</style>
+<style id="world-class-halloween-moon">
 /* Halloween moon experience: cinematic blood-moon lighting, haunted silhouettes and layered depth. */
 .moon-scroll-stage{
   min-height:620px; background:#030207;
@@ -4334,7 +4339,8 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 .moon-scroll-hint{z-index:9;color:rgba(255,210,196,.55);letter-spacing:.18em}
 @media(max-width:700px){.moon-scroll-stage{height:500px;min-height:500px}.haunt-caption{top:24px;width:90%;white-space:normal}.haunt-caption b{font-size:8px;letter-spacing:.2em}.haunt-caption small{font-size:6px}.blood-moon-halo{width:300px;height:300px}.graveyard{height:72px}.graveyard:before{height:50px}.graveyard i{scale:.7}.haunt-bat{font-size:24px}.witch-haze{height:60px}.earth-glow{width:300px;height:300px}}
 @media(prefers-reduced-motion:reduce){.dhl-stars i,.blood-moon-halo,.haunt-bat,.witch-haze,.orbit-moon.active:after{animation:none!important}}
-</style>\n<style id="moon-click-nightmare">
+</style>
+<style id="moon-click-nightmare">
 /* A deliberate cinematic scare: eclipse, impact rings, lightning, embers and a brief eye reveal. */
 .moon-event-effects{position:absolute;inset:0;z-index:7;pointer-events:none;overflow:hidden;opacity:0}
 .moon-awakened .moon-event-effects{opacity:1}
@@ -4370,7 +4376,12 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 .moon-awakened .haunt-bat{animation:batPanic 1.2s ease-in-out infinite alternate;color:#ff2738}
 @keyframes batPanic{from{translate:0 0;rotate:-18deg}to{translate:70px -35px;rotate:20deg}}
 @media(prefers-reduced-motion:reduce){.moon-awakened .moon-event-effects,.moon-awakened .moon-screamer,.moon-awakened .moon-terror-flash,.moon-awakened .shockwave,.moon-awakened .lightning-bolt,.moon-awakened .haunt-eye,.moon-awakened .moon-message,.moon-awakened .moon-submessage,.moon-awakened .haunt-runes,.moon-awakened .moon-scroll-stage,.moon-awakened .blood-moon-halo,.moon-awakened .dhl-stars i,.moon-awakened .haunt-bat{animation:none!important}.moon-awakened .moon-event-effects{opacity:1}.moon-awakened .moon-message{opacity:1}}
-</style>\n\n<style id="xb-first-paint-guard">\nhtml{background:#08090c}body{background:#08090c;color:#f7f7f8}.xb-intro{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:hidden;background:#08090c;color:#f7f7f8}.xb-skip-intro{position:absolute;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:2;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:#f7f7f8;border-radius:999px;padding:12px 17px;font:600 13px/1.2 inherit;cursor:pointer;min-height:44px}.skip-link{position:fixed;left:16px;top:12px;z-index:10000;transform:translateY(-150%);padding:11px 15px;border-radius:10px;background:#fff;color:#090909;font-weight:700}\n</style>\n</head>
+</style>
+
+<style id="xb-first-paint-guard">
+html{background:#08090c}body{background:#08090c;color:#f7f7f8}.xb-intro{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:hidden;background:#08090c;color:#f7f7f8}.xb-skip-intro{position:absolute;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:2;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:#f7f7f8;border-radius:999px;padding:12px 17px;font:600 13px/1.2 inherit;cursor:pointer;min-height:44px}.skip-link{position:fixed;left:16px;top:12px;z-index:10000;transform:translateY(-150%);padding:11px 15px;border-radius:10px;background:#fff;color:#090909;font-weight:700}
+</style>
+</head>
 
 
 <body>
