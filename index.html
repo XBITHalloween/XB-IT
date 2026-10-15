@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <script id="xb-start-at-top">
 /* Always open the event page at the beginning, including browser back/forward restores. */
@@ -4093,6 +4094,51 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.xb-cursor-glow{display:none}}
 </style>
 
+<style id="xb-modern-usability-patch">
+  :root { color-scheme: light; }
+  html { scroll-padding-top: 24px; }
+  body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a, button, input { -webkit-tap-highlight-color: transparent; }
+  button, .featured-button, .nav-link { touch-action: manipulation; }
+  :where(a, button, input, .scrabble-tile):focus-visible {
+    outline: 3px solid #ffad24 !important; outline-offset: 4px !important;
+  }
+  .featured-button { text-decoration: none; }
+  .featured-button-icon { display: inline-grid; place-items: center; }
+  @media (max-width: 640px) {
+    .page { width: min(100% - 28px, 1120px); }
+    .event-title { line-height: .98; }
+    .featured-button { gap: 10px; flex-wrap: wrap; }
+    .nav { align-items: center; }
+    .nav-right { justify-content: flex-end; }
+    .form-container input { min-height: 48px; font-size: 16px; }
+    .small-button, .submit-button, .xb-celebration-close, .xb-skip-intro { min-height: 44px; }
+  }
+</style>
+
+<style id="xb-modern-refresh-patch">
+  :root { --xb-orange:#ff812e; --xb-amber:#ffc078; --xb-ink:#08090c; --xb-panel:rgba(255,255,255,.055); }
+  body { -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  .nav-link { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:40px; padding:9px 12px; border:1px solid transparent; border-radius:999px; background:transparent; color:inherit; font:inherit; text-decoration:none; cursor:pointer; transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease; }
+  .nav-link:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.12); color:#fff; }
+  .nav-link:active { transform:scale(.97); }
+  .nav-replay-intro { color:#ffb27d; }
+  .featured-button { gap:clamp(10px,2vw,22px); }
+  .featured-button strong { display:inline-flex; align-items:center; gap:8px; }
+  .featured-button strong span { transition:transform .2s ease; }
+  .featured-button:hover strong span { transform:translate(2px,-2px); }
+  :where(a,button,input,textarea,select,[tabindex]):focus-visible { outline:3px solid #ffb05e !important; outline-offset:4px !important; }
+  button:disabled { cursor:not-allowed !important; opacity:.58; filter:saturate(.65); transform:none !important; }
+  .small-button,.submit-button,.xb-celebration-close { font-weight:700; letter-spacing:-.01em; }
+  .event-visual-card { transition:transform .24s ease,border-color .24s ease,background .24s ease,box-shadow .24s ease; }
+  .event-visual-card:hover { transform:translateY(-4px); border-color:rgba(255,129,46,.28); box-shadow:0 18px 45px rgba(0,0,0,.18); }
+  .section-title { text-wrap:balance; }
+  .section-description,.event-description,.info-text { text-wrap:pretty; }
+  #status { min-height:1.5em; }
+  @media(max-width:700px) { .nav-right { align-items:center; } .nav-link { min-height:44px; padding:9px 10px; } .nav-replay-intro { font-size:11px; } .featured-button { min-height:52px; } .event-visual-card:hover { transform:none; } }
+  @media(prefers-reduced-motion:reduce) { .nav-link,.featured-button,.event-visual-card,.featured-button strong span { transition:none !important; } .event-visual-card:hover { transform:none; } }
+</style>
+
 </head>
 
 
@@ -4153,6 +4199,7 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
   <div class="nav-right">
     <a class="nav-link" href="#moonScrollStage">Experience</a>
     <a class="nav-link" href="#scrabble-challenge">Challenge</a>
+    <button class="nav-link nav-replay-intro" id="replayIntro" type="button" aria-label="Replay the Halloween introduction">Replay intro ↺</button>
     <span class="nav-season">Halloween Team Event · 2026</span>
   </div>
 
@@ -4197,19 +4244,17 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
     <a
       href="#scrabble-challenge"
       class="featured-button"
-      aria-label="Go to Featured Challenge"
+      aria-label="Jump to the Halloween Word Challenge"
     >
 
-      <span class="featured-button-icon">
-        
-      </span>
+      <span class="featured-button-icon" aria-hidden="true">✦</span>
 
       <span>
         Featured Challenge
       </span>
 
       <strong>
-        Click Here →
+        Play the challenge <span aria-hidden="true">↗</span>
       </strong>
 
     </a>
@@ -4227,8 +4272,17 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
 <div class="moon-scroll-stage" id="moonScrollStage" aria-label="Interactive Earth and Moon scene">
   <div class="dhl-sky-grid"></div>
   <div class="dhl-stars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="moon-haunt-layer" aria-hidden="true">
+    <span class="haunt-bat bat-one">✦</span><span class="haunt-bat bat-two">⌁</span><span class="haunt-bat bat-three">✦</span>
+    <span class="witch-haze haze-one"></span><span class="witch-haze haze-two"></span>
+    <span class="blood-moon-halo"></span>
+    <span class="moon-terror-flash"></span><span class="moon-screamer" aria-hidden="true">☠</span><span class="haunt-runes">☽　✦　☠　✦　☾</span>
+    <span class="graveyard"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="haunt-caption"><b>THE HAUNTED ORBIT</b><small>ONE NIGHT · ONE CHALLENGE · ONE WINNER</small></span>
+  </div>
 
   <div class="dhl-speed-lines"><span></span><span></span><span></span><span></span></div>
+  <div class="moon-event-effects" aria-hidden="true"><span class="shockwave shockwave-a"></span><span class="shockwave shockwave-b"></span><span class="lightning-bolt bolt-a"></span><span class="lightning-bolt bolt-b"></span><span class="haunt-eye">◉</span><span class="moon-message">THE ECLIPSE HAS AWAKENED</span><span class="moon-submessage">YOU HAVE DISTURBED SOMETHING ANCIENT</span><span class="moon-embers"></span></div>
 
   <div class="earth-system" id="earthSystem">
     <div class="earth-glow"></div>
@@ -4266,7 +4320,7 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
   </div>
 
   <div class="dhl-horizon"></div>
-  <div class="moon-scroll-hint">Scroll to reveal · Click the moon to orbit</div>
+  <div class="moon-scroll-hint">Scroll into the scene · The moon has a surprise</div>
 </div>
 
 <section class="info-grid info-grid-single">
@@ -4310,8 +4364,8 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
 
   <p class="section-description">
 
-    Create the largest word you can from the tiles below.
-    The first person to find the winning word wins.
+    Use the scrambled tiles to discover the hidden word.
+    The first person to submit the exact winning word wins.
 
   </p>
 
@@ -4333,11 +4387,11 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
     <div class="challenge-header">
 
       <div class="challenge-title">
-        Build your word
+        Build your answer
       </div>
 
       <div class="challenge-subtitle">
-        Tap the tiles to add letters to your answer.
+        Tap the tiles to build your answer, or type it below.
       </div>
 
     </div>
@@ -4357,7 +4411,7 @@ body{background-color:var(--xb-ink);-webkit-font-smoothing:antialiased;text-rend
       >
 
         <span class="answer-placeholder">
-          Select letters from the board
+          Select tiles to build your answer
         </span>
 
       </div>
@@ -5961,6 +6015,38 @@ setInterval(
   }
 
   let raf=0;
+  let hasAutoPlayed=false;
+  let resetTimer=null;
+
+  function triggerMoonExperience(){
+    const orbit=moon.closest('.moon-orbit');
+    if(!orbit)return;
+    orbit.classList.remove('is-orbiting');
+    stage.classList.remove('moon-awakened');
+    void stage.offsetWidth;
+    orbit.classList.add('is-orbiting');
+    stage.classList.add('moon-awakened');
+    moon.classList.add('active');
+    moon.setAttribute('aria-label','The haunted moon is awakened.');
+    stage.querySelectorAll('.moon-event-effects span, .moon-screamer').forEach(function(el){
+      el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+    });
+    clearTimeout(resetTimer);
+    resetTimer=setTimeout(function(){
+      orbit.classList.remove('is-orbiting');
+      stage.classList.remove('moon-awakened');
+      moon.classList.remove('active');
+      moon.setAttribute('aria-label','Haunted moon animation');
+    },7200);
+  }
+
+  function update(){
+    const r=stage.getBoundingClientRect();
+    const inView=r.top<window.innerHeight*.8&&r.bottom>window.innerHeight*.12;
+    stage.classList.toggle('is-visible',inView);
+    if(inView&&!hasAutoPlayed){hasAutoPlayed=true;triggerMoonExperience();}
+  }
+
   window.addEventListener('scroll',function(){
     if(raf)return;
     raf=requestAnimationFrame(function(){update();raf=0;});
@@ -5978,21 +6064,8 @@ setInterval(
     system.style.transform='translate(-50%,-50%)';
   });
 
-  moon.addEventListener('click',function(){
-    const orbit = moon.closest('.moon-orbit');
-    if(!orbit) return;
-
-    orbit.classList.remove('is-orbiting');
-    void orbit.offsetWidth;
-    orbit.classList.add('is-orbiting');
-    moon.classList.add('active');
-
-    clearTimeout(window.__moonOrbitTimer);
-    window.__moonOrbitTimer = setTimeout(function(){
-      orbit.classList.remove('is-orbiting');
-      moon.classList.remove('active');
-    }, 5400);
-  });
+  // Auto-play on first entry into the viewport; clicking remains an optional replay.
+  moon.addEventListener('click',triggerMoonExperience);
 
   update();
 })();
@@ -6200,8 +6273,9 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 <script id="xb-experience-engine">
 (function(){
   'use strict';
-  const intro = document.getElementById('xbIntro');
-  const skipIntro = document.getElementById('xbSkipIntro');
+  let intro = document.getElementById('xbIntro');
+  let skipIntro = document.getElementById('xbSkipIntro');
+  const replayIntro = document.getElementById('replayIntro');
   const celebration = document.getElementById('xbWinnerCelebration');
   const particleField = document.getElementById('xbParticleField');
   const closeCelebration = document.getElementById('xbCloseCelebration');
@@ -6213,18 +6287,44 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
   let statusFailures = 0;
   const originalSetStatus = typeof setStatus === 'function' ? setStatus : null;
 
-  function finishIntro(remember){
-    if(!intro) return;
+  // The intro is deliberately not persisted in localStorage: it should appear
+  // on every fresh page load, and can also be replayed from the navigation.
+  // Keep the node in the DOM so browser Back/Forward Cache restores can replay it.
+  function finishIntro(){
+    if(!intro || intro.classList.contains('is-leaving')) return;
     if(introTimer) window.clearTimeout(introTimer);
-    if(remember){try{localStorage.setItem('xbIntroSeen','1')}catch(e){}}
     intro.classList.add('is-leaving');
-    window.setTimeout(function(){intro.remove()}, reducedMotion ? 0 : 850);
+    intro.setAttribute('aria-hidden','true');
+    intro.inert = true;
+    window.setTimeout(function(){ if(skipIntro) skipIntro.blur(); }, reducedMotion ? 0 : 850);
   }
-  let introSeen = false;
-  try{introSeen = localStorage.getItem('xbIntroSeen') === '1'}catch(e){}
-  if(intro && (introSeen || reducedMotion)) finishIntro(false);
-  else if(intro) { if(skipIntro) window.setTimeout(function(){ if(document.body.contains(intro) && !intro.classList.contains('is-leaving')) skipIntro.focus({preventScroll:true}); }, 0); introTimer = window.setTimeout(function(){finishIntro(true)}, 3300); }
-  if(skipIntro) skipIntro.addEventListener('click',function(){finishIntro(true)});
+  function replayIntroNow(){
+    if(!intro || !intro.isConnected) return;
+    if(introTimer) window.clearTimeout(introTimer);
+    intro.classList.remove('is-leaving');
+    intro.removeAttribute('aria-hidden');
+    intro.inert = false;
+    intro.querySelectorAll('*').forEach(function(el){
+      el.style.animation='none';
+      void el.offsetHeight;
+      el.style.animation='';
+    });
+    try { if(skipIntro) skipIntro.focus({preventScroll:true}); } catch(e) { if(skipIntro) skipIntro.focus(); }
+    introTimer = window.setTimeout(finishIntro, reducedMotion ? 1800 : 3300);
+  }
+  if(intro) {
+    if(skipIntro) window.setTimeout(function(){
+      if(document.body.contains(intro) && !intro.classList.contains('is-leaving')) {
+        try { skipIntro.focus({preventScroll:true}); } catch(e) { skipIntro.focus(); }
+      }
+    }, 0);
+    introTimer = window.setTimeout(finishIntro, reducedMotion ? 1800 : 3300);
+  }
+  if(skipIntro) skipIntro.addEventListener('click', finishIntro);
+  if(replayIntro) replayIntro.addEventListener('click', replayIntroNow);
+  window.addEventListener('pageshow',function(event){
+    if(event.persisted) replayIntroNow();
+  });
   // Keep keyboard focus inside the intro while it is presented as a modal.
   document.addEventListener('keydown',function(e){
     if(!intro || !document.body.contains(intro) || intro.classList.contains('is-leaving') || e.key!=='Tab')return;
@@ -6325,6 +6425,96 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 })();
 </script>
 
+
+<style id="world-class-halloween-moon">
+/* Halloween moon experience: cinematic blood-moon lighting, haunted silhouettes and layered depth. */
+.moon-scroll-stage{
+  min-height:620px; background:#030207;
+  background-image:radial-gradient(ellipse at 50% 45%,rgba(117,15,29,.22),transparent 42%),radial-gradient(ellipse at 12% 78%,rgba(255,93,0,.09),transparent 34%),linear-gradient(180deg,#03020a 0%,#09040c 55%,#020205 100%);
+  border-color:rgba(255,104,55,.24);box-shadow:inset 0 0 100px rgba(0,0,0,.8),0 35px 100px rgba(0,0,0,.6),0 0 55px rgba(100,0,20,.08);
+}
+.moon-scroll-stage:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at 50% 42%,transparent 25%,rgba(0,0,0,.3) 67%,rgba(0,0,0,.8) 100%);}
+.moon-scroll-stage:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");mix-blend-mode:screen}
+.dhl-sky-grid{opacity:.07;background-size:70px 70px}
+.dhl-stars i{background:#ffd9cb;box-shadow:0 0 9px rgba(255,118,85,.7);animation:hauntTwinkle 3.8s ease-in-out infinite alternate}
+.dhl-stars i:nth-child(3n){animation-delay:-1.4s}.dhl-stars i:nth-child(4n){animation-delay:-2.5s}
+@keyframes hauntTwinkle{from{opacity:.18;scale:.7}to{opacity:.95;scale:1.3}}
+.moon-haunt-layer{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.blood-moon-halo{position:absolute;left:50%;top:49%;width:430px;height:430px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(181,18,35,.16),rgba(107,7,25,.08) 45%,transparent 70%);filter:blur(12px);animation:bloodHalo 7s ease-in-out infinite alternate}
+@keyframes bloodHalo{from{opacity:.55;scale:.92}to{opacity:1;scale:1.08}}
+.haunt-bat{position:absolute;color:#09060b;font-size:31px;filter:drop-shadow(0 0 4px rgba(255,80,54,.35));opacity:.9;animation:batFlight 13s ease-in-out infinite}
+.bat-one{left:12%;top:27%;font-size:35px}.bat-two{right:17%;top:34%;font-size:40px;animation-delay:-4s}.bat-three{left:24%;top:62%;font-size:22px;animation-delay:-8s}
+@keyframes batFlight{0%,100%{translate:0 0;rotate:-8deg}35%{translate:35px -17px;rotate:8deg}68%{translate:-18px 12px;rotate:-4deg}}
+.witch-haze{position:absolute;width:65%;height:95px;bottom:10%;border-radius:50%;filter:blur(28px);background:linear-gradient(90deg,transparent,rgba(110,34,54,.18),rgba(255,85,36,.1),transparent);animation:hazeDrift 15s ease-in-out infinite alternate}
+.haze-one{left:-12%}.haze-two{right:-22%;bottom:20%;animation-delay:-7s;opacity:.65}
+@keyframes hazeDrift{from{translate:-25px 0;scale:.9}to{translate:50px -12px;scale:1.1}}
+.graveyard{position:absolute;left:0;right:0;bottom:0;height:100px;opacity:.92;background:linear-gradient(180deg,transparent,#030205 48%);}
+.graveyard:before{content:"";position:absolute;left:0;right:0;bottom:0;height:72px;background:#030205;clip-path:polygon(0 48%,4% 44%,7% 59%,12% 50%,15% 68%,21% 51%,27% 58%,31% 37%,35% 61%,42% 53%,47% 65%,53% 42%,58% 57%,64% 50%,68% 63%,74% 39%,80% 57%,86% 47%,91% 63%,96% 45%,100% 53%,100% 100%,0 100%)}
+.graveyard i{position:absolute;bottom:30px;width:17px;height:33px;background:#08060a;border-radius:7px 7px 2px 2px;box-shadow:0 0 0 1px rgba(255,100,65,.08)}
+.graveyard i:before{content:"";position:absolute;width:5px;height:25px;left:6px;top:-5px;background:inherit;border-radius:3px}.graveyard i:after{content:"";position:absolute;width:23px;height:5px;left:-3px;top:5px;background:inherit;border-radius:3px}
+.graveyard i:nth-child(1){left:9%;transform:rotate(-8deg) scale(.8)}.graveyard i:nth-child(2){left:20%;bottom:22px;transform:scale(.65)}.graveyard i:nth-child(3){left:79%;transform:rotate(7deg) scale(.8)}.graveyard i:nth-child(4){left:89%;bottom:21px;transform:scale(.65)}.graveyard i:nth-child(5){left:71%;bottom:18px;transform:rotate(-5deg) scale(.52)}.graveyard i:nth-child(6){left:31%;bottom:15px;transform:scale(.5)}
+.haunt-caption{position:absolute;z-index:8;top:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;white-space:nowrap;text-shadow:0 2px 20px #000}
+.haunt-caption b{font-size:10px;letter-spacing:.32em;color:#ffb49b;font-weight:800}.haunt-caption small{font-size:8px;letter-spacing:.16em;color:rgba(255,231,220,.48)}
+.earth-system{z-index:3;filter:drop-shadow(0 18px 34px rgba(0,0,0,.4))}
+.earth-glow{background:radial-gradient(circle,rgba(255,46,43,.17),rgba(53,60,145,.12) 48%,transparent 73%);width:430px;height:430px}
+.earth{box-shadow:0 0 0 1px rgba(255,255,255,.04),0 0 32px rgba(91,117,255,.18),0 0 110px rgba(168,13,39,.18),inset -34px -24px 50px rgba(0,0,0,.58)}
+.earth::after{border-color:rgba(255,89,75,.18);box-shadow:0 0 22px rgba(255,67,51,.2),inset 0 0 18px rgba(255,255,255,.06)}
+.moon-orbit{border-color:rgba(255,102,77,.3);box-shadow:0 0 45px rgba(104,7,25,.08)}
+.orbit-track{border-color:rgba(255,220,210,.12)}
+.orbit-moon{filter:sepia(.2) contrast(1.04);box-shadow:0 0 22px rgba(255,240,224,.28),0 0 60px rgba(255,61,47,.18);overflow:hidden}
+.orbit-moon:before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 28% 25%,rgba(255,225,200,.04),transparent 30%),linear-gradient(135deg,transparent 28%,rgba(88,0,12,.12) 55%,rgba(0,0,0,.68) 100%);z-index:2;pointer-events:none}
+.orbit-moon.active{filter:sepia(.5) saturate(1.55) hue-rotate(305deg);box-shadow:0 0 0 7px rgba(255,69,54,.08),0 0 38px rgba(255,71,45,.9),0 0 110px rgba(200,8,32,.55)}
+.orbit-moon.active:after{content:"";position:absolute;inset:-9px;border:2px solid rgba(255,83,61,.48);border-radius:50%;animation:moonEclipseRing 1s ease-out infinite}
+@keyframes moonEclipseRing{from{transform:scale(.85);opacity:.9}to{transform:scale(1.35);opacity:0}}
+.weston-dot{background:#ff5b45;box-shadow:0 0 0 3px rgba(255,65,55,.18),0 0 18px rgba(255,65,55,.95)}
+.weston-pulse{border-color:rgba(255,78,59,.85)}.weston-label{border-left-color:rgba(255,88,66,.65)}.weston-label small{color:#ff8a70}
+.dhl-speed-lines span{background:linear-gradient(90deg,transparent,rgba(255,80,57,.5),rgba(255,204,0,.42),transparent);opacity:.65}
+.dhl-satellite .sat-body{box-shadow:0 0 16px rgba(255,204,0,.12)}
+.dhl-tape{border-color:rgba(255,84,60,.3);background:rgba(24,4,9,.62);backdrop-filter:blur(10px);color:rgba(255,220,209,.72)}
+.dhl-tape span{border-color:rgba(255,84,60,.19)}
+.dhl-horizon{background:linear-gradient(180deg,#14070c,#030205);box-shadow:0 -30px 80px rgba(0,0,0,.9)}
+.moon-scroll-hint{z-index:9;color:rgba(255,210,196,.55);letter-spacing:.18em}
+@media(max-width:700px){.moon-scroll-stage{height:500px;min-height:500px}.haunt-caption{top:24px;width:90%;white-space:normal}.haunt-caption b{font-size:8px;letter-spacing:.2em}.haunt-caption small{font-size:6px}.blood-moon-halo{width:300px;height:300px}.graveyard{height:72px}.graveyard:before{height:50px}.graveyard i{scale:.7}.haunt-bat{font-size:24px}.witch-haze{height:60px}.earth-glow{width:300px;height:300px}}
+@media(prefers-reduced-motion:reduce){.dhl-stars i,.blood-moon-halo,.haunt-bat,.witch-haze,.orbit-moon.active:after{animation:none!important}}
+</style>
+
 </body>
 
 </html>
+<style id="moon-click-nightmare">
+/* A deliberate cinematic scare: eclipse, impact rings, lightning, embers and a brief eye reveal. */
+.moon-event-effects{position:absolute;inset:0;z-index:7;pointer-events:none;overflow:hidden;opacity:0}
+.moon-awakened .moon-event-effects{opacity:1}
+.moon-terror-flash{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 48%,rgba(255,20,30,.55),rgba(120,0,16,.2) 30%,transparent 68%)}
+.moon-awakened .moon-terror-flash{animation:terrorFlash 1.1s steps(1,end) both}
+@keyframes terrorFlash{0%,15%,35%,100%{opacity:0}5%,23%{opacity:.95}10%,29%{opacity:.22}}
+.moon-screamer{position:absolute;z-index:8;left:50%;top:49%;font-size:clamp(100px,20vw,230px);line-height:1;color:#e9d8c9;text-shadow:0 0 14px #ff152b,0 0 50px #e00026,0 0 100px #790016;opacity:0;transform:translate(-50%,-50%) scale(.05) rotate(-16deg);pointer-events:none}
+.moon-awakened .moon-screamer{animation:skullReveal 1.55s cubic-bezier(.12,.86,.18,1) .2s both}
+@keyframes skullReveal{0%{opacity:0;transform:translate(-50%,-50%) scale(.05) rotate(-16deg);filter:blur(18px)}28%{opacity:1;transform:translate(-50%,-50%) scale(1.22) rotate(7deg);filter:blur(0)}42%{transform:translate(-50%,-50%) scale(.92) rotate(-4deg)}60%,100%{opacity:0;transform:translate(-50%,-50%) scale(1.5) rotate(0);filter:blur(8px)}}
+.shockwave{position:absolute;left:50%;top:49%;width:70px;height:70px;border:2px solid rgba(255,55,48,.9);border-radius:50%;box-shadow:0 0 22px rgba(255,25,35,.65),inset 0 0 20px rgba(255,25,35,.25);transform:translate(-50%,-50%) scale(.1);opacity:0}
+.moon-awakened .shockwave-a{animation:shockwaveOut 2.4s ease-out both}
+.moon-awakened .shockwave-b{animation:shockwaveOut 2.4s ease-out .42s both;border-color:rgba(255,200,140,.75)}
+@keyframes shockwaveOut{0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}12%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(9)}}
+.lightning-bolt{position:absolute;top:-8%;width:3px;height:76%;opacity:0;background:#ffe9dd;filter:drop-shadow(0 0 7px #ff263a) drop-shadow(0 0 20px #ff263a);clip-path:polygon(45% 0,100% 0,55% 42%,100% 42%,15% 100%,38% 52%,0 52%)}
+.bolt-a{left:22%;transform:rotate(11deg)}.bolt-b{right:24%;height:62%;transform:rotate(-9deg)}
+.moon-awakened .bolt-a{animation:lightningStrike .9s steps(1,end) .08s 3}.moon-awakened .bolt-b{animation:lightningStrike .75s steps(1,end) .35s 2}
+@keyframes lightningStrike{0%,100%{opacity:0}12%,23%{opacity:1}30%{opacity:.08}39%{opacity:.9}47%{opacity:0}}
+.haunt-eye{position:absolute;left:50%;top:49%;font-size:clamp(50px,9vw,110px);color:#ff2436;text-shadow:0 0 18px red,0 0 70px #c00024;opacity:0;transform:translate(-50%,-50%) scaleX(.1)}
+.moon-awakened .haunt-eye{animation:eyeOpen 2.8s ease-in-out 1.35s both}
+@keyframes eyeOpen{0%,100%{opacity:0;transform:translate(-50%,-50%) scaleX(.1)}20%,72%{opacity:.92;transform:translate(-50%,-50%) scaleX(1.5)}38%{transform:translate(-50%,-50%) scaleX(1)}}
+.moon-message,.moon-submessage{position:absolute;left:50%;width:90%;text-align:center;text-transform:uppercase;opacity:0;letter-spacing:.3em;font-weight:900;text-shadow:0 0 22px #f20d25;transform:translate(-50%,12px)}
+.moon-message{top:23%;font-size:clamp(11px,2vw,20px);color:#ffe4d9}.moon-submessage{top:29%;font-size:clamp(7px,1vw,10px);color:#ff8078;letter-spacing:.2em}
+.moon-awakened .moon-message{animation:messageIn 3.8s ease 1.8s both}.moon-awakened .moon-submessage{animation:messageIn 3.6s ease 2.15s both}
+@keyframes messageIn{0%,100%{opacity:0;transform:translate(-50%,12px);filter:blur(5px)}12%,72%{opacity:1;transform:translate(-50%,0);filter:blur(0)}}
+.haunt-runes{position:absolute;z-index:4;left:50%;top:49%;transform:translate(-50%,-50%) rotate(-12deg);white-space:nowrap;color:rgba(255,40,50,.0);font-size:clamp(18px,3vw,32px);letter-spacing:.35em}
+.moon-awakened .haunt-runes{animation:runesCircle 5s ease-out both}
+@keyframes runesCircle{0%{opacity:0;transform:translate(-50%,-50%) rotate(-12deg) scale(.2)}18%{color:rgba(255,50,60,.8);opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(345deg) scale(2.8);color:rgba(255,50,60,0)}}
+.moon-awakened .moon-scroll-stage,.moon-scroll-stage.moon-awakened{animation:hauntedCameraShake .62s linear .05s 3}
+@keyframes hauntedCameraShake{0%,100%{translate:0 0}15%{translate:-5px 2px}30%{translate:6px -3px}45%{translate:-4px -2px}60%{translate:4px 3px}75%{translate:-2px 1px}}
+.moon-awakened .blood-moon-halo{animation:bloodHalo .35s ease-in-out infinite alternate;filter:blur(8px) saturate(2.8);background:radial-gradient(circle,rgba(255,0,25,.62),rgba(160,0,22,.28) 48%,transparent 72%)}
+.moon-awakened .dhl-stars i{animation:starPanic .55s steps(2,end) infinite alternate}
+@keyframes starPanic{from{opacity:.1;scale:.7}to{opacity:1;scale:1.7;box-shadow:0 0 16px #ff2b3b}}
+.moon-awakened .haunt-bat{animation:batPanic 1.2s ease-in-out infinite alternate;color:#ff2738}
+@keyframes batPanic{from{translate:0 0;rotate:-18deg}to{translate:70px -35px;rotate:20deg}}
+@media(prefers-reduced-motion:reduce){.moon-awakened .moon-event-effects,.moon-awakened .moon-screamer,.moon-awakened .moon-terror-flash,.moon-awakened .shockwave,.moon-awakened .lightning-bolt,.moon-awakened .haunt-eye,.moon-awakened .moon-message,.moon-awakened .moon-submessage,.moon-awakened .haunt-runes,.moon-awakened .moon-scroll-stage,.moon-awakened .blood-moon-halo,.moon-awakened .dhl-stars i,.moon-awakened .haunt-bat{animation:none!important}.moon-awakened .moon-event-effects{opacity:1}.moon-awakened .moon-message{opacity:1}}
+</style>
