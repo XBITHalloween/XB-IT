@@ -6009,11 +6009,6 @@ setInterval(
   const moon=document.getElementById('dhlMoon');
   if(!stage||!system||!moon)return;
 
-  function update(){
-    const r=stage.getBoundingClientRect();
-    stage.classList.toggle('is-visible',r.top<window.innerHeight*.8&&r.bottom>window.innerHeight*.12);
-  }
-
   let raf=0;
   let hasAutoPlayed=false;
   let resetTimer=null;
@@ -6067,7 +6062,7 @@ setInterval(
   // Auto-play on first entry into the viewport; clicking remains an optional replay.
   moon.addEventListener('click',triggerMoonExperience);
 
-  update();
+  window.requestAnimationFrame(update);
 })();
 </script>
 
@@ -6478,9 +6473,6 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 @media(prefers-reduced-motion:reduce){.dhl-stars i,.blood-moon-halo,.haunt-bat,.witch-haze,.orbit-moon.active:after{animation:none!important}}
 </style>
 
-</body>
-
-</html>
 <style id="moon-click-nightmare">
 /* A deliberate cinematic scare: eclipse, impact rings, lightning, embers and a brief eye reveal. */
 .moon-event-effects{position:absolute;inset:0;z-index:7;pointer-events:none;overflow:hidden;opacity:0}
@@ -6518,3 +6510,7 @@ html{scroll-behavior:smooth;scroll-padding-top:28px}body{overflow-x:clip}
 @keyframes batPanic{from{translate:0 0;rotate:-18deg}to{translate:70px -35px;rotate:20deg}}
 @media(prefers-reduced-motion:reduce){.moon-awakened .moon-event-effects,.moon-awakened .moon-screamer,.moon-awakened .moon-terror-flash,.moon-awakened .shockwave,.moon-awakened .lightning-bolt,.moon-awakened .haunt-eye,.moon-awakened .moon-message,.moon-awakened .moon-submessage,.moon-awakened .haunt-runes,.moon-awakened .moon-scroll-stage,.moon-awakened .blood-moon-halo,.moon-awakened .dhl-stars i,.moon-awakened .haunt-bat{animation:none!important}.moon-awakened .moon-event-effects{opacity:1}.moon-awakened .moon-message{opacity:1}}
 </style>
+</body>
+
+</html>
+
